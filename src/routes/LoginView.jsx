@@ -3,18 +3,38 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from "firebase/auth";
-import React, { useEffect } from "react";
-import { auth } from "../firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { auth, userExists } from "../firebase/firebase";
+import { useNavigate } from "react-router-dom";
 
 export const LoginView = () => {
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
+  // state:
+  // 0: inicializado
+  //1: loading
+  //2: login completo
+  //3: login pero sin registro
+  //4: no hay nadie logueado
+  const [state, setCurrentState] = useState(0);
   useEffect(() => {
+    setCurrentState(1);
     onAuthStateChanged(auth, handleUserStateChanged);
   }, []);
 
-  const handleUserStateChanged = (user) => {
+  const handleUserStateChanged = async (user) => {
     if (user) {
-      console.log(user.displayName);
+      const isRegistered = await userExists(user.uid);
+      if (isRegistered) {
+        navigate("/dashboard");
+        setCurrentState(2);
+      } else {
+        navigate("/register");
+        setCurrentState(3);
+        console.log(user.displayName);
+      }
     } else {
+      setCurrentState(4);
       console.log("No hay nadie logueado");
     }
   };
@@ -32,9 +52,16 @@ export const LoginView = () => {
     }
   };
 
-  return (
-    <div>
-      <button onClick={handleOnClick}>Login with Google</button>
-    </div>
-  );
+  if (state === 2) {
+    return <div>Autenticado y registrado</div>;
+  } else if (state === 3) {
+    return <div>Autenticado pero no registrado</div>;
+  } else if (state === 4) {
+    return (
+      <div>
+        <button onClick={handleOnClick}>Login with Google</button>
+      </div>
+    );
+  }
+  return <div>Loading...</div>;
 };
