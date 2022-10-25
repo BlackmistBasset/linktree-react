@@ -1,5 +1,94 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthProvider } from "../components/AuthProvider";
+import { DashboardWrapper } from "../components/DashboardWrapper";
+import { v4 as uuidv4 } from "uuid";
+import { getLinks, insertNewLink } from "../firebase/firebase";
+// import { Link } from "../components/Link";
 
 export const DashboardView = () => {
-  return <div>DashboardView</div>;
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState({});
+  const [state, setState] = useState(0);
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [links, setLinks] = useState([]);
+
+  const handleUserLoggedIn = async (user) => {
+    setCurrentUser(user);
+    setState(2);
+    const resLinks = await getLinks(user.uid);
+    setLinks([...resLinks]);
+  };
+  const handleUserNotRegistered = (user) => {
+    navigate("/login");
+  };
+
+  const handleUserNotLoggedIn = () => {
+    navigate("/login");
+  };
+  if (state === 0) {
+    return (
+      <AuthProvider
+        onUserLoggedIn={handleUserLoggedIn}
+        onUserNotRegistered={handleUserNotRegistered}
+        onUserNotLoggedIn={handleUserNotLoggedIn}
+      >
+        Loading...
+      </AuthProvider>
+    );
+  }
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    addLink();
+  };
+
+  const handleOnChange = (e) => {
+    if (e.target.name === "title") {
+      setTitle(e.target.value);
+    } else if (e.target.name === "url") {
+      setUrl(e.target.value);
+    }
+  };
+
+  const addLink = () => {
+    if (title !== "" && url !== "") {
+      const newLink = {
+        id: uuidv4(),
+        title: title,
+        url: url,
+        uid: currentUser.uid,
+      };
+      const res = insertNewLink(newLink);
+      newLink.docId = res.id;
+      setTitle("");
+      setUrl("");
+      setLinks([...links, newLink]);
+    }
+  };
+
+  return (
+    <DashboardWrapper>
+      <div>Dashboard</div>
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="title">Título</label>
+        <input type="text" id="title" name="title" onChange={handleOnChange} />
+
+        <label htmlFor="url">Url</label>
+        <input type="text" id="url" name="url" onChange={handleOnChange} />
+
+        <input type="submit" value="Crear Link" />
+      </form>
+      <div>
+        {links.map((link) => {
+          return (
+            <div key={link.id}>
+              <a href={link.url}>{link.title}</a>
+            </div>
+          );
+        })}
+      </div>
+    </DashboardWrapper>
+  );
 };
