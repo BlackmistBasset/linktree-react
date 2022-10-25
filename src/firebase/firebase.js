@@ -40,3 +40,72 @@ export const userExists = async (uid) => {
   console.log(res);
   return res.exists();
 };
+
+export const usernameExists = async (username) => {
+  const users = [];
+  const docsRef = collection(db, "users");
+  const q = query(docsRef, where("username", "==", username));
+
+  const querySnapShot = await getDocs(q);
+
+  querySnapShot.forEach((doc) => users.push(doc.data()));
+  return users.length > 0 ? users[0].uid : null;
+};
+
+export const registerNewUser = async (user) => {
+  try {
+    const collectionRef = collection(db, "users");
+    const docRef = doc(collectionRef, user.uid);
+    await setDoc(docRef, user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUser = async (user) => {
+  try {
+    const collectionRef = collection(db, "users");
+    const docRef = doc(collectionRef, user.uid);
+    await setDoc(docRef, user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getUserInfo = async (uid) => {
+  try {
+    const docRef = doc(db, "users", uid);
+    const document = await getDoc(docRef);
+    return document.data();
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const insertNewLink = async (link) => {
+  try {
+    const docRef = collection(db, "links");
+    const res = await addDoc(docRef, link);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getLinks = async (uid) => {
+  const links = [];
+  try {
+    const collectionRef = collection(db, "links");
+    const q = query(collectionRef, where("uid", "==", uid));
+    const querySnapShot = await getDocs(q);
+
+    querySnapShot.forEach((doc) => {
+      const link = { ...doc.data() };
+      link.docId = doc.id;
+      links.push(link);
+    });
+    return links;
+  } catch (err) {
+    console.log(err);
+  }
+};
