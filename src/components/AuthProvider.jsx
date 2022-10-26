@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   auth,
   registerNewUser,
@@ -13,35 +13,34 @@ export const AuthProvider = ({
   onUserNotLoggedIn,
   onUserNotRegistered,
 }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, handleUserStateChanged);
-  }, []);
-
-  const handleUserStateChanged = async (user) => {
-    if (user) {
-      const isRegistered = await userExists(user.uid);
-      if (isRegistered) {
-        const userInfo = await getUserInfo(user.uid);
-        if (userInfo.processCompleted) {
-          onUserLoggedIn(userInfo);
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const isRegistered = await userExists(user.uid);
+        if (isRegistered) {
+          const userInfo = await getUserInfo(user.uid);
+          if (userInfo.processCompleted) {
+            onUserLoggedIn(userInfo);
+          } else {
+            onUserNotRegistered(userInfo);
+          }
         } else {
-          onUserNotRegistered(userInfo);
+          await registerNewUser({
+            uid: user.uid,
+            displayName: user.displayName,
+            profilePicture: "",
+            username: "",
+            processCompleted: false,
+          });
+          onUserNotRegistered(user);
         }
       } else {
-        await registerNewUser({
-          uid: user.uid,
-          displayName: user.displayName,
-          profilePicture: "",
-          username: "",
-          processCompleted: false,
-        });
-        onUserNotRegistered(user);
+        onUserNotLoggedIn();
       }
-    } else {
-      onUserNotLoggedIn();
-    }
-  };
+    });
+  }, [onUserLoggedIn, onUserNotLoggedIn, onUserNotRegistered]);
+
   return <div>{children}</div>;
 };
