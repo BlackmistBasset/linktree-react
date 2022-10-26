@@ -129,3 +129,23 @@ export const deleteLink = async (docId) => {
     console.log(err);
   }
 };
+
+export const setProfilePic = async (uid, file) => {
+  try {
+    const imgRef = ref(storage, `images/${uid}`);
+    const uploadRes = await uploadBytes(imgRef, file);
+    return uploadRes;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getProfilePic = async (profilePic) => {
+  try {
+    const imgRef = ref(storage, profilePic);
+    const url = await getDownloadURL(imgRef);
+    return url;
+  } catch (err) {
+    console.log(err);
+  }
+};
