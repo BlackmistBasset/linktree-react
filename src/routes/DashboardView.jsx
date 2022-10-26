@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthProvider } from "../components/AuthProvider";
 import { DashboardWrapper } from "../components/DashboardWrapper";
 import { v4 as uuidv4 } from "uuid";
-import { getLinks, insertNewLink } from "../firebase/firebase";
-// import { Link } from "../components/Link";
+import {
+  getLinks,
+  insertNewLink,
+  updateLink,
+  deleteLink,
+} from "../firebase/firebase";
+import { Link } from "../components/Link";
 
 export const DashboardView = () => {
   const navigate = useNavigate();
@@ -68,6 +73,19 @@ export const DashboardView = () => {
     }
   };
 
+  const handleDeleteLink = async (docId) => {
+    await deleteLink(docId);
+    const tmp = links.filter((link) => link.docId !== docId);
+    setLinks([...tmp]);
+  };
+
+  const handleUpdateLink = async (docId, title, url) => {
+    const link = links.find((item) => item.docId === docId);
+    link.title = title;
+    link.url = url;
+    await updateLink(docId, link);
+  };
+
   return (
     <DashboardWrapper>
       <div>Dashboard</div>
@@ -83,9 +101,14 @@ export const DashboardView = () => {
       <div>
         {links.map((link) => {
           return (
-            <div key={link.id}>
-              <a href={link.url}>{link.title}</a>
-            </div>
+            <Link
+              key={link.docId}
+              docId={link.docId}
+              url={link.url}
+              title={link.title}
+              onDelete={handleDeleteLink}
+              onUpdate={handleUpdateLink}
+            />
           );
         })}
       </div>
