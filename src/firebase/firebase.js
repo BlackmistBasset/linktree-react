@@ -149,3 +149,17 @@ export const getProfilePic = async (profilePic) => {
     console.log(err);
   }
 };
+
+export const getUserProfileInfo = async (uid) => {
+  try {
+    const profileInfo = getUserInfo(uid);
+    const linksInfo = await getLinks(uid);
+    let res = {
+      profileInfo: profileInfo,
+      linksInfo: linksInfo,
+    };
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
