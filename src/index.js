@@ -9,6 +9,7 @@ import { EditProfileView } from "./routes/EditProfileView";
 import { SignOutView } from "./routes/SignOutView";
 import { PublicProfileView } from "./routes/PublicProfileView";
 import { RegisterView } from "./routes/RegisterView";
+import { PageNotFound } from "./routes/PageNotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,6 +22,7 @@ root.render(
       <Route path="signout" element={<SignOutView />} />
       <Route path="u/:username" element={<PublicProfileView />} />
       <Route path="register" element={<RegisterView />} />
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   </BrowserRouter>
 );

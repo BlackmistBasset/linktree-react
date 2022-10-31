@@ -1,12 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  getBytes,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getFirestore,
   collection,
@@ -152,7 +146,7 @@ export const getProfilePic = async (profilePic) => {
 
 export const getUserProfileInfo = async (uid) => {
   try {
-    const profileInfo = getUserInfo(uid);
+    const profileInfo = await getUserInfo(uid);
     const linksInfo = await getLinks(uid);
     let res = {
       profileInfo: profileInfo,
@@ -162,4 +156,8 @@ export const getUserProfileInfo = async (uid) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const logOut = async () => {
+  await auth.signOut();
 };
