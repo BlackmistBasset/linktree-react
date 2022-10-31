@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { AuthProvider } from "../components/AuthProvider";
+import { AuthProvider } from "../../components/AuthProvider";
 import { useNavigate, Link } from "react-router-dom";
-import { updateUser, usernameExists } from "../firebase/firebase";
+import { updateUser, usernameExists } from "../../firebase/firebase";
+
+import style from "./RegisterView.module.css";
 
 export const RegisterView = () => {
   const navigate = useNavigate();
@@ -42,15 +44,19 @@ export const RegisterView = () => {
 
   if (state === 3 || state === 5) {
     return (
-      <div>
-        <h1>Bienvenido {currentUser.displayName}</h1>
-        <p>Para terminar el proceso, elige un nombre de usuario:</p>
+      <div className={style.registerContainer}>
+        <h1>Bienvenid@ {currentUser.displayName} :)</h1>
+        <p>
+          Para completar el proceso de registro, elige un nombre de usuario:
+        </p>
         {state === 5 ? <p>El nombre de usuario ya existe, escoge otro</p> : ""}
         <div>
           <input type="text" onChange={handleInputUserName} />
         </div>
         <div>
-          <button onClick={handleContinue}>Continuar</button>
+          <button className="btn" onClick={handleContinue}>
+            Continuar
+          </button>
         </div>
       </div>
     );
@@ -58,9 +64,11 @@ export const RegisterView = () => {
 
   if (state === 6) {
     return (
-      <div>
-        <h1>Felicidades! Ya puedes crear tus links.</h1>
-        <Link to="/dashboard">Continuar</Link>
+      <div className={style.registerContainer}>
+        <h1>Perfecto! Ya puedes crear tus links.</h1>
+        <Link className="btn" to="/dashboard">
+          Continuar
+        </Link>
       </div>
     );
   }

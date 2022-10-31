@@ -53,12 +53,13 @@ export const Link = ({ url, title, docId, onDelete, onUpdate }) => {
   };
 
   return (
-    <div key={docId}>
-      <div>
-        <div>
+    <div className="link">
+      <div className="link-info">
+        <div className="link-title">
           {editTitle ? (
             <>
               <input
+                type="text"
                 ref={titleRef}
                 value={currentTitle}
                 onChange={handleChangeTitle}
@@ -67,15 +68,18 @@ export const Link = ({ url, title, docId, onDelete, onUpdate }) => {
             </>
           ) : (
             <>
-              <button onClick={handleEditTitle}>Editar</button>
               {currentTitle}
+              <button className="btn-edit" onClick={handleEditTitle}>
+                <span className="material-icons">edit</span>
+              </button>
             </>
           )}
         </div>
-        <div>
+        <div className="link-url">
           {editUrl ? (
             <>
               <input
+                type="text"
                 ref={urlRef}
                 value={currentUrl}
                 onChange={handleChangeUrl}
@@ -84,15 +88,21 @@ export const Link = ({ url, title, docId, onDelete, onUpdate }) => {
             </>
           ) : (
             <>
-              <button onClick={handleEditUrl}>Editar</button>
-              {currentUrl}
+              <a className="link-url" href={currentUrl}>
+                {currentUrl}
+              </a>
+              <button className="btn-edit" onClick={handleEditUrl}>
+                <span className="material-icons">edit</span>
+              </button>
             </>
           )}
         </div>
       </div>
 
       <div>
-        <button onClick={handleDelete}>Eliminar</button>
+        <button className="btn-delete" onClick={handleDelete}>
+          <span className="material-icons">delete</span>
+        </button>
       </div>
     </div>
   );

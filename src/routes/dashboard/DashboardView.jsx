@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "../components/AuthProvider";
-import { DashboardWrapper } from "../components/DashboardWrapper";
+import { AuthProvider } from "../../components/AuthProvider";
+import { DashboardWrapper } from "../../components/DashboardWrapper";
 import { v4 as uuidv4 } from "uuid";
 import {
   getLinks,
   insertNewLink,
   updateLink,
   deleteLink,
-} from "../firebase/firebase";
-import { Link } from "../components/Link";
+} from "../../firebase/firebase";
+import { Link } from "../../components/Link";
+
+import style from "./DashboardView.module.css";
 
 export const DashboardView = () => {
   const navigate = useNavigate();
@@ -88,17 +90,25 @@ export const DashboardView = () => {
 
   return (
     <DashboardWrapper>
-      <div>Dashboard</div>
-      <form onSubmit={handleOnSubmit}>
-        <label htmlFor="title">Título</label>
-        <input type="text" id="title" name="title" onChange={handleOnChange} />
-
-        <label htmlFor="url">Url</label>
-        <input type="text" id="url" name="url" onChange={handleOnChange} />
-
-        <input type="submit" value="Crear Link" />
+      <div className={style.title}>Administrador de Links</div>
+      <form className={style.linksForm} onSubmit={handleOnSubmit}>
+        <div className={style.labelContainer}>
+          <label htmlFor="title">Título:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className={style.labelContainer}>
+          <label htmlFor="url">Url:</label>
+          <input type="text" id="url" name="url" onChange={handleOnChange} />
+        </div>
+        <input className="btn" type="submit" value="Crear Link" />
       </form>
-      <div>
+      <div className="links-container">
+        <h2 className={style.title}>Mi lista de links:</h2>
         {links.map((link) => {
           return (
             <Link

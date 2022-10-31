@@ -2,8 +2,8 @@ import React from "react";
 
 export const PublicLink = ({ link }) => {
   return (
-    <div>
-      <a href={link.url}>{link.title}</a>
-    </div>
+    <a className="public-link-container" href={link.url}>
+      {link.title}
+    </a>
   );
 };

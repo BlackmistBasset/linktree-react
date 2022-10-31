@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { PublicLink } from "../components/PublicLink";
+import { DashboardWrapper } from "../../components/DashboardWrapper";
+import { PublicLink } from "../../components/PublicLink";
 import {
   usernameExists,
   getUserProfileInfo,
   getProfilePic,
-} from "../firebase/firebase";
-import { PageNotFound } from "./PageNotFound";
+} from "../../firebase/firebase";
+import { PageNotFound } from "../404/PageNotFound";
+
+import style from "./PublicProfileView.module.css";
 
 export const PublicProfileView = () => {
   const params = useParams();
@@ -42,17 +45,28 @@ export const PublicProfileView = () => {
     return <PageNotFound />;
   }
   return (
-    <div>
-      <div>
-        <img src={picUrl} alt="profile pic" />
+    <DashboardWrapper>
+      <div className={style.publicProfileContainer}>
+        <div className={style.mainContainer}>
+          <div>
+            <img
+              className={style.profilePicture}
+              src={picUrl}
+              alt="profile pic"
+            />
+          </div>
+          <div>
+            <h2 className="title">{profile?.profileInfo.username}</h2>
+            <h3 className="title">{profile?.profileInfo.displayName}</h3>
+          </div>
+        </div>
+        <div className="public-links-container">
+          <h1 className="title">Links de {profile?.profileInfo.username}:</h1>
+          {profile?.linksInfo.map((link) => {
+            return <PublicLink key={link.id} link={link} />;
+          })}
+        </div>
       </div>
-      <h2>{profile?.profileInfo.username}</h2>
-      <h3>{profile?.profileInfo.displayName}</h3>
-      <div>
-        {profile?.linksInfo.map((link) => {
-          return <PublicLink key={link.id} link={link} />;
-        })}
-      </div>
-    </div>
+    </DashboardWrapper>
   );
 };
