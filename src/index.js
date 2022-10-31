@@ -3,13 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LoginView } from "./routes/LoginView";
-import { DashboardView } from "./routes/DashboardView";
-import { EditProfileView } from "./routes/EditProfileView";
-import { SignOutView } from "./routes/SignOutView";
-import { PublicProfileView } from "./routes/PublicProfileView";
-import { RegisterView } from "./routes/RegisterView";
-import { PageNotFound } from "./routes/PageNotFound";
+import { LoginView } from "./routes/login/LoginView";
+import { DashboardView } from "./routes/dashboard/DashboardView";
+import { EditProfileView } from "./routes/editProfile/EditProfileView";
+import { SignOutView } from "./routes/logOut/SignOutView";
+import { PublicProfileView } from "./routes/publicProfile/PublicProfileView";
+import { RegisterView } from "./routes/register/RegisterView";
+import { PageNotFound } from "./routes/404/PageNotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,7 +20,7 @@ root.render(
       <Route path="dashboard" element={<DashboardView />} />
       <Route path="dashboard/profile" element={<EditProfileView />} />
       <Route path="signout" element={<SignOutView />} />
-      <Route path="u/:username" element={<PublicProfileView />} />
+      <Route path=":username" element={<PublicProfileView />} />
       <Route path="register" element={<RegisterView />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

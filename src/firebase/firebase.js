@@ -31,7 +31,6 @@ const storage = getStorage(app);
 export const userExists = async (uid) => {
   const docRef = doc(db, "users", uid);
   const res = await getDoc(docRef);
-  console.log(res);
   return res.exists();
 };
 

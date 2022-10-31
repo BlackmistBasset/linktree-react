@@ -1,8 +1,10 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
-import { auth } from "../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "../components/AuthProvider";
+import { AuthProvider } from "../../components/AuthProvider";
+
+import style from "./LoginView.module.css";
 
 export const LoginView = () => {
   const navigate = useNavigate();
@@ -65,8 +67,11 @@ export const LoginView = () => {
 
   if (state === 4) {
     return (
-      <div>
-        <button onClick={handleOnClick}>Login with Google</button>
+      <div className={style.loginView}>
+        <h1>LinkTree</h1>
+        <button className={style.provider} onClick={handleOnClick}>
+          Login with Google
+        </button>
       </div>
     );
   }

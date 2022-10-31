@@ -1,0 +1,20 @@
+.profileContainer {
+  padding: 10px 0px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profileContainer img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.title {
+  color: darkmagenta;
+}

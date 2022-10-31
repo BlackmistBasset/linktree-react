@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider } from "../components/AuthProvider";
-import { logOut } from "../firebase/firebase";
+import { AuthProvider } from "../../components/AuthProvider";
+import { logOut } from "../../firebase/firebase";
 export const SignOutView = () => {
   const navigate = useNavigate();
   const handleUserLoggedIn = async (user) => {
