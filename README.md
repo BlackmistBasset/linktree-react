@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+Les doy la bienvenida a éste nuevo proyecto que realicé :) 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción general:
 
-## Available Scripts
+Se trata de un gestor de links que permite al usuario tener sus links ordenados en un solo lugar. Ésta aplicación está construida con react y utiliza los servicios de storage, database y hosting de firebase. Para los estilos utilicé CSS puro y CSS modules. Mi principal objetivo con ésta aplicación fue, por una parte, repasar mis conocimientos en React. Por otra parte, aprender a utilizar los servicios de firebase para un proyecto significativamente más complejo que debo llevar a cabo ahora y será construido con éstas mismas herramientas. Espero les guste!
 
-In the project directory, you can run:
+### 👉🏻 [Acceder a la aplicación](https://linktree-react-7af3b.web.app/)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<img src="src/assets/1.PNG" alt="perfil del usuario" width="500px" />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Funcionalidades:
 
-### `npm test`
+### Autenticación:
+-La aplicación permite al usuario crearse una cuenta iniciando sesión con una cuenta de Google. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Dashboard:
+-En ésta sección se pueden crear los links, así como también editarlos y eliminarlos. Los links son almacenados en el servicio de firebase storage. 
 
-### `npm run build`
+<img src="src/assets/2.PNG" alt="perfil del usuario" width="500px" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Editar Perfil: 
+-En ésta sección se puede agregar una foto de perfil desde nuestro dispositivo. Para poder desarrollar ésta funcionalidad se utiliza el servicio de firebase storage.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img src="src/assets/3.PNG" alt="perfil del usuario" width="500px" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Perfil público: 
+-En la sección "Mi perfil" se pueden ver los links, avatar y nombre del usuario, cualquier persona con ésta url podrá ver sus enlaces, dado que el perfil de cada usuario es público.
 
-### `npm run eject`
+### 404:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-Al ingresar una URL que no sea válida, la aplicación mostrará un mensaje de error y te permitirá regresar al dashboard. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img src="src/assets/4.PNG" alt="perfil del usuario" width="500px" />
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Gracias por llegar hasta acá! Saludos :)
