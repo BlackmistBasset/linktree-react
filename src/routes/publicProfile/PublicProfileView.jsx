@@ -8,13 +8,14 @@ import {
   getProfilePic,
 } from "../../firebase/firebase";
 import { PageNotFound } from "../404/PageNotFound";
+import profilepic from "../../assets/profilepic.png";
 
 import style from "./PublicProfileView.module.css";
 
 export const PublicProfileView = () => {
   const params = useParams();
   const [profile, setProfile] = useState(null);
-  const [picUrl, setPicUrl] = useState("");
+  const [picUrl, setPicUrl] = useState(profilepic);
   const [state, setState] = useState(0);
 
   useEffect(() => {

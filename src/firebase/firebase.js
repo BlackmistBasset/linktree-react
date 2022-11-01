@@ -143,6 +143,16 @@ export const getProfilePic = async (profilePic) => {
   }
 };
 
+export const getSamplePic = async () => {
+  try {
+    const imgRef = ref(storage, `images/profilepic.png`);
+    const url = await getDownloadURL(imgRef);
+    return url;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getUserProfileInfo = async (uid) => {
   try {
     const profileInfo = await getUserInfo(uid);

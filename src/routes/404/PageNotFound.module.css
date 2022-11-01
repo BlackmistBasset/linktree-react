@@ -1,0 +1,19 @@
+.link {
+  width: 150px;
+  font-size: 18px;
+  border: none;
+  background-color: darkmagenta;
+  color: white;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.link:hover {
+  background-color: rgb(171, 1, 171);
+  color: white;
+}

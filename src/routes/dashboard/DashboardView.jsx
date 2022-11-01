@@ -41,7 +41,9 @@ export const DashboardView = () => {
         onUserNotRegistered={handleUserNotRegistered}
         onUserNotLoggedIn={handleUserNotLoggedIn}
       >
-        Loading...
+        <DashboardWrapper>
+          <h1 className="title">Cargando...</h1>
+        </DashboardWrapper>
       </AuthProvider>
     );
   }
