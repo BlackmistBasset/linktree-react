@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginView } from "./routes/login/LoginView";
 import { DashboardView } from "./routes/dashboard/DashboardView";
 import { EditProfileView } from "./routes/editProfile/EditProfileView";
-import { SignOutView } from "./routes/logOut/SignOutView";
+import { SignOutView } from "./routes/logout/SignOutView";
 import { PublicProfileView } from "./routes/publicProfile/PublicProfileView";
 import { RegisterView } from "./routes/register/RegisterView";
 import { PageNotFound } from "./routes/404/PageNotFound";

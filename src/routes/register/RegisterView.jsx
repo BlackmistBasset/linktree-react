@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { AuthProvider } from "../../components/AuthProvider";
 import { useNavigate, Link } from "react-router-dom";
-import { updateUser, usernameExists } from "../../firebase/firebase";
+import {
+  updateUser,
+  usernameExists,
+  getSamplePic,
+} from "../../firebase/firebase";
 
 import style from "./RegisterView.module.css";
 
@@ -33,9 +37,11 @@ export const RegisterView = () => {
       if (exists) {
         setState(5);
       } else {
+        const sampleUrl = await getSamplePic();
         const tmp = { ...currentUser };
         tmp.username = username;
         tmp.processCompleted = true;
+        tmp.profilePicture = sampleUrl;
         await updateUser(tmp);
         setState(6);
       }
