@@ -88,7 +88,7 @@ export const Link = ({ url, title, docId, onDelete, onUpdate }) => {
             </>
           ) : (
             <>
-              <a className="link-url" href={currentUrl}>
+              <a className="link-url" href={`http://${currentUrl}`}>
                 {currentUrl}
               </a>
               <button className="btn-edit" onClick={handleEditUrl}>
