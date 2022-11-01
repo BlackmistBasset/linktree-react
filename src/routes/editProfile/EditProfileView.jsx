@@ -61,7 +61,11 @@ export const EditProfileView = () => {
         onUserLoggedIn={handleUserLoggedIn}
         onUserNotLoggedIn={handleUserNotLoggedIn}
         onUserNotRegistered={handleUserNotRegistered}
-      ></AuthProvider>
+      >
+        <DashboardWrapper>
+          <h1 className="title">Cargando...</h1>
+        </DashboardWrapper>
+      </AuthProvider>
     );
   }
   return (
